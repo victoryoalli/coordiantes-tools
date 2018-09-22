@@ -2,27 +2,26 @@ from shapely.geometry import shape,Point, Polygon
 import fiona
 from collections import OrderedDict
 
+#print(fiona.__file__)
 
-print(fiona.__file__)
+input = fiona.open("data/out.shp","r")
 
-input = fiona.open("out.shp","r")
-
-print "ID,\t TYPE,\t LAT,\t LONG\n"
+print "ID,TYPE,LAT,LONG"
 for feat in input:       
 	ls = shape(feat['geometry'])
 
-	print feat
+#	print feat
 #	print "\nPROPERTIES"
 #	print feat['properties']['OBJECTID']
 #	print feat['properties']['ENTIDAD']
 #	print "\n COOR"
 	for c in feat['geometry']['coordinates']:
 		p = Point(c)
-		print("%s,%s,%s,%s" % (feat['id'], feat['properties']['ENTIDAD'],p.y,p.x))
+		print("%s,'%s',%s,%s" % (feat['id'], feat['properties']['ENTIDAD'],p.y,p.x))
 #		print p.x
 #		print p.y
 
-	print "\n"
+#	print "\n"
 		
 #import pyproj
 
